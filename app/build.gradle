@@ -7,14 +7,35 @@ android {
     defaultConfig {
         applicationId 'com.winlator'
         minSdkVersion 26
-        targetSdkVersion 28
-        versionCode 33
-        versionName "11.2"
+        targetSdkVersion 35
+        versionCode 34
+        versionName "11.2-android15"
+
+        ndk {
+            abiFilters 'arm64-v8a'
+        }
+
+        externalNativeBuild {
+            cmake {
+                arguments "-DANDROID_SUPPORT_FLEXIBLE_PAGE_SIZES=ON"
+                cFlags "-Wl,-z,max-page-size=16384"
+                cppFlags "-Wl,-z,max-page-size=16384"
+            }
+        }
     }
 
     buildTypes {
         debug {
-            minifyEnabled true
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+            ndk {
+                abiFilters 'arm64-v8a'
+            }
+        }
+        release {
+            minifyEnabled false
+            signingConfig signingConfigs.debug
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
 
             ndk {
@@ -25,9 +46,10 @@ android {
 
     lintOptions {
         checkReleaseBuilds false
+        abortOnError false
     }
 
-    ndkVersion '24.0.8215888'
+    ndkVersion '26.1.10909125'
 
     externalNativeBuild {
         cmake {
