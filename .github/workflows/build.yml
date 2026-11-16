@@ -37,7 +37,7 @@ jobs:
         run: chmod +x gradlew
 
       - name: Build Debug & Release APKs
-        run: ./gradlew assembleDebug assembleRelease --stacktrace
+        run: ./gradlew assembleDebug assembleRelease --no-daemon -Dorg.gradle.jvmargs="-Xmx4g -XX:+UseG1GC" --stacktrace
 
       - name: Prepare APK Artifacts
         run: |
