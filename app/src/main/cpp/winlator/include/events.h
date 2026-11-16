@@ -1,6 +1,7 @@
 #ifndef WINLATOR_EVENTS_H
 #define WINLATOR_EVENTS_H
 
+#include <time.h>
 #include <stdbool.h>
 #include <stdatomic.h>
 #include <poll.h>
